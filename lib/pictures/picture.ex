@@ -9,7 +9,7 @@ defmodule Pictures.Picture do
     field(:size, :integer, null: false)
   end
 
-  def changeset(%Picture{} = picture, attrs) do
+  def changeset(picture, attrs) do
     picture
     |> cast(attrs, [:name, :url, :size])
     |> validate_required([:name, :url, :size])

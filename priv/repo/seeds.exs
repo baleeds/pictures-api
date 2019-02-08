@@ -1,4 +1,8 @@
-alias Pictures.{Repo, Picture}
+alias Pictures.{
+  Repo,
+  Picture,
+  Gallery
+}
 
 Repo.insert!(%Picture{
   name: "Rainbow monsters",
@@ -31,4 +35,9 @@ Repo.insert!(%Picture{
   url:
     "https://www.awn.com/sites/default/files/styles/original/public/image/featured/1027753-tom-and-jerry-blamed-mid-east-violence.jpg?itok=Hyqev1zp",
   size: 77598
+})
+
+Repo.insert!(%Gallery{
+  name: "Gallery 1",
+  description: "Yep",
 })
