@@ -13,5 +13,8 @@ defmodule Pictures.Picture do
     picture
     |> cast(attrs, [:name, :url, :size])
     |> validate_required([:name, :url, :size])
+    |> unique_constraint(:url)
+    |> unique_constraint(:name)
+    |> validate_length(:name, [min: 3])
   end
 end
