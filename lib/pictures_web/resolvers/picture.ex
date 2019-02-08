@@ -10,7 +10,8 @@ defmodule PicturesWeb.Resolvers.Picture do
     |> Picture.changeset(create_picture_input)
     |> Repo.insert()
     |> case do
-      {:ok, %{id: id}} -> {:ok, %{
+      {:ok, %{id: id}
+      } -> {:ok, %{
         created_picture_id: id
       }}
       
