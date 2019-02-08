@@ -15,6 +15,14 @@ defmodule PicturesWeb.Schema do
 
       resolve(&Picture.delete/3)
     end
+
+    field :create_picture, :create_picture_payload do
+      arg(:name, non_null(:string))
+      arg(:url, non_null(:string))
+      arg(:size, non_null(:integer))
+
+      resolve(&Picture.create/3)
+    end
   end
 
   object :picture do
@@ -26,5 +34,9 @@ defmodule PicturesWeb.Schema do
 
   object :delete_picture_payload do
     field(:deleted_picture_id, non_null(:id))
+  end
+
+  object :create_picture_payload do
+    field(:created_picture_id, non_null(:id))
   end
 end

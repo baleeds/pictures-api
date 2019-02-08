@@ -5,6 +5,20 @@ defmodule PicturesWeb.Resolvers.Picture do
     {:ok, Repo.all(Picture)}
   end
 
+  def create(_, create_picture_input, _) do
+    %Picture{}
+    |> Picture.changeset(create_picture_input)
+    |> Repo.insert()
+    |> case do
+      {:ok, %{id: id}} -> {:ok, %{
+        created_picture_id: id
+      }}
+      
+      {:error, changeset} ->
+        {:error, "creation failed"}
+    end
+  end
+
   def delete(_, %{id: id}, _) do
     Picture
     |> Repo.get(id)
