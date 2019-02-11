@@ -46,7 +46,7 @@ defmodule Pictures.Classes do
   """
   def get_teacher!(id) do
     Repo.get!(Teacher, id)
-    |> Repo.preload(:subjects)
+    # |> Repo.preload(:subjects)
   end
 
   @doc """
@@ -146,7 +146,7 @@ defmodule Pictures.Classes do
   """
   def get_subject!(id) do
     Repo.get!(Subject, id)
-    |> Repo.preload(:teachers)
+    # |> Repo.preload(:teacher)
   end
 
   @doc """

@@ -1,39 +1,42 @@
 defmodule PicturesWeb.Resolvers.Subject do
-  alias Pictures.{Classes, Picture}
+  alias Pictures.{Classes}
 
   def all(_, _, _) do
     {:ok, Classes.list_subjects()}
   end
 
-  def create(_, create_picture_input, _) do
-    %Picture{}
-    |> Picture.changeset(create_picture_input)
-    |> Repo.insert()
+  def create(_, %{input: create_subject_input}, _) do
+    create_subject_input
+    |> IO.inspect
+    |> Classes.create_subject
+    |> IO.inspect
     |> case do
       {:ok, %{id: id}} -> {:ok, %{
-        created_picture_id: id
+        created_subject_id: id
       }}
       
       {:error, changeset} ->
-        {:error, "creation failed"}
+        {:error, transform_errors(changeset)}
     end
   end
 
-  def delete(_, %{id: id}, _) do
-    Picture
-    |> Repo.get(id)
+  def delete(_, %{input: %{id: id}}, _) do
+    id
+    |> Classes.get_subject!
+    |> IO.inspect
     |> case do
-      nil ->
-        {:error, "picture with id #{id} not found"}
+      {:error, _} ->
+        {:error, "subject with id #{id} not found"}
 
-      %Picture{} = picture ->
-        picture
-        |> Repo.delete()
+      %Classes.Subject{} = subject ->
+        subject
+        |> IO.inspect
+        |> Classes.delete_subject
         |> case do
           {:ok, %{id: id}} ->
             {:ok,
              %{
-               deleted_picture_id: id
+               deleted_subject_id: id
              }}
 
           {:error, changeset} ->

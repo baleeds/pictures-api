@@ -16,7 +16,8 @@ defmodule Pictures.Classes.Subject do
   @doc false
   def changeset(subject, attrs) do
     subject
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :teacher_id])
     |> validate_required([:name])
+    |> foreign_key_constraint(:teacher_id)
   end
 end
