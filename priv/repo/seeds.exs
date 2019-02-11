@@ -1,7 +1,11 @@
 alias Pictures.{
   Repo,
   Picture,
-  Gallery
+  Gallery,
+}
+alias Pictures.Classes.{
+  Teacher,
+  Subject
 }
 
 Repo.insert!(%Picture{
@@ -40,4 +44,18 @@ Repo.insert!(%Picture{
 Repo.insert!(%Gallery{
   name: "Gallery 1",
   description: "Yep",
+})
+
+Repo.insert!(%Teacher{
+  name: "Ben",
+})
+
+Repo.insert(%Subject{
+  name: "Science",
+  teacher_id: 1,
+})
+
+Repo.insert(%Subject{
+  name: "Math",
+  teacher_id: 1,
 })
