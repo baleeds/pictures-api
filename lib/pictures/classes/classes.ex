@@ -27,7 +27,7 @@ defmodule Pictures.Classes do
   """
   def list_teachers do
     Repo.all(Teacher)
-    |> Repo.preload(:subjects)
+    # |> Repo.preload(:subjects)
   end
 
   @doc """
@@ -127,7 +127,7 @@ defmodule Pictures.Classes do
   """
   def list_subjects do
     Repo.all(Subject)
-    |> Repo.preload(:teacher)
+    # |> Repo.preload(:teacher)
   end
 
   @doc """
