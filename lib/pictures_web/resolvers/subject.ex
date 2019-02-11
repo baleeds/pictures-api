@@ -20,6 +20,31 @@ defmodule PicturesWeb.Resolvers.Subject do
     end
   end
 
+  def update(_, %{input: update_subject_input}, _) do
+    update_subject_input.id
+    |> Classes.get_subject!
+    |> IO.inspect
+    |> case do
+      {:error, _} ->
+        {:error, "subject with id #{update_subject_input.id} not found"}
+
+      %Classes.Subject{} = subject ->
+        subject
+        |> IO.inspect
+        |> Classes.update_subject(update_subject_input)
+        |> case do
+          {:ok, %{id: id}} ->
+            {:ok,
+             %{
+               updated_subject_id: id
+             }}
+
+          {:error, changeset} ->
+            {:error, transform_errors(changeset)}
+        end
+    end
+  end
+
   def delete(_, %{input: %{id: id}}, _) do
     id
     |> Classes.get_subject!
