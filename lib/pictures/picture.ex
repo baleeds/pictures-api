@@ -1,12 +1,17 @@
 defmodule Pictures.Picture do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Pictures.Picture
+  alias Pictures.{
+    Picture,
+    Gallery
+  }
 
   schema "pictures" do
     field(:name, :string, null: false)
     field(:url, :string, null: false)
     field(:size, :integer, null: false)
+
+    many_to_many(:gallery, Gallery, join_through: "gallery_pictures")
   end
 
   def changeset(picture, attrs) do

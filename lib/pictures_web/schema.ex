@@ -41,6 +41,9 @@ defmodule PicturesWeb.Schema do
     field(:name, non_null(:string))
     field(:url, non_null(:string))
     field(:size, non_null(:integer))
+    field(:gallery, :gallery) do
+      resolve(&Gallery.first/3)
+    end
   end
 
   object :gallery do
